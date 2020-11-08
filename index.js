@@ -115,19 +115,16 @@ client.once('ready', () => {
 client.on('guildMemberAdd', member => {
     let server = client.guilds.cache.get("432327121000595466")
     var memberRole= server.roles.cache.find(role => role.name === "뉴비")
-    member.roles.add(memberRole);    
+    member.roles.add(memberRole);
+    client.guilds.cache.get("432327121000595466").channels.cache.get("774851059666386974").send(emb_BD);    
 });
 client.on('message', message => {
     const args = message.content.split(" "); 
     const emb_BD = new Discord.MessageEmbed() // 공지
     .setColor('#0099ff')
-    .setTitle('공지')
-    .setDescription(args[2])
+    .setTitle('본인인증 방법')
     .addFields(
-        { name: '오이오이', value: '쇼가나이나'},
-        { name: '\u200B', value: '\u200B' },
-        { name: '오이오이', value: '아잉아잉', inline: true },
-        { name: '오이오이', value: '쇼가나이나', inline: true},
+        { name: '!!인증 <본명>', value: 'ex) !!인증 호영'},
     );
     // { name: '\u200B', value: '\u200B' },        // 빈칸만들기
     const emb_HELP = new Discord.MessageEmbed() // 도움말
