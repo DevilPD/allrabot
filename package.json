@@ -1,0 +1,25 @@
+{
+  "name": "DiscordBot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.4.0",
+    "dotenv": "^8.2.0",
+    "ftp-client": "^0.2.2",
+    "minecraft-data": "^2.69.1",
+    "minecraft-protocol": "^1.17.0",
+    "minecraft-server-util": "^3.0.3",
+    "request": "^2.88.2",
+    "riot-api": "^0.1.0",
+    "urlencode": "^1.1.0",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {},
+  "description": ""
+}
