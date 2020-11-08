@@ -107,6 +107,7 @@ client.once('ready', () => {
     console.log("");
     console.log("                          제작자 : 원호영");
     client.user.setActivity(' !!명령어 | 진화', { type : 'PLAYING'});
+    client.guilds.cache.get("308931109067030530").channels.cache.get("308931109067030530").send("디코봇이 활성화되었습니다.");
 });
 
  // 
