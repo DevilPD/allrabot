@@ -115,8 +115,7 @@ client.once('ready', () => {
 client.on('guildMemberAdd', member => {
     let server = client.guilds.cache.get("432327121000595466")
     var memberRole= server.roles.cache.find(role => role.name === "뉴비")
-    member.roles.add(memberRole);
-    client.guilds.cache.get("432327121000595466").channels.cache.get("774851059666386974").send(emb_BD);    
+    member.roles.add(memberRole);    
 });
 client.on('message', message => {
     const args = message.content.split(" "); 
