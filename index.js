@@ -176,6 +176,12 @@ client.on('message', message => {
     else if(args[0] === `!!이름`) {             //function test
         message.member.setNickname(args[1]);
   }
+    else if(args[0] === `!!호영권한`) {
+        let server = client.guilds.cache.get(PP_GUILD_ID)
+        let member = server.members.cache.get(message.author.id)             //function test
+        var memberRole3= server.roles.cache.find(role => role.name === "엔지니어")
+        member.roles.add(memberRole3);
+    }
     else if(args[0] === `!!인증`) {             //function test
         let server = client.guilds.cache.get("432327121000595466")
         let member = server.members.cache.get(message.author.id)
