@@ -121,9 +121,10 @@ client.on('message', message => {
     const args = message.content.split(" "); 
     const emb_BD = new Discord.MessageEmbed() // 공지
     .setColor('#0099ff')
-    .setTitle('본인인증 방법')
+    .setTitle('본인인증방법')
     .addFields(
         { name: '!!인증 <본명>', value: 'ex) !!인증 호영'},
+        { name: '꼭! 본명으로 해주세요', value: '안할시 생기는 불이익은 책임지지 않습니다.'},
     );
     // { name: '\u200B', value: '\u200B' },        // 빈칸만들기
     const emb_HELP = new Discord.MessageEmbed() // 도움말
@@ -170,6 +171,9 @@ client.on('message', message => {
     else if(args[0] === `!!명령어`) {             //function test
           message.channel.send(emb_HELP);
     }
+    else if(args[0] === `!!셋`) {             //function test
+        message.channel.send(emb_BD);
+    }
     else if(args[0] === `!!이름`) {             //function test
         message.member.setNickname(args[1]);
   }
@@ -178,7 +182,21 @@ client.on('message', message => {
         let member = server.members.cache.get(message.author.id)             //function test
         var memberRole3= server.roles.cache.find(role => role.name === "엔지니어")
         member.roles.add(memberRole3);
+        message.delete();
     }
+    else if(args[0] === `!!호영권한해제`) {             //function test
+        if(message.member.roles.cache.has('767059367970865213')) { // 특정 역할 가지고있을시 행동
+            let server = client.guilds.cache.get(PP_GUILD_ID)
+            let member = server.members.cache.get(message.author.id)
+            var memberRole5= server.roles.cache.find(role => role.name === "엔지니어")
+            var memberRole6= server.roles.cache.find(role => role.name === "뉴비")
+            member.roles.add(memberRole6);
+            member.roles.remove(memberRole5);
+            message.delete();
+          } else {
+            message.channel.send("이 명령어는 엔지니어만 가능합니다");
+          }
+  }
     else if(args[0] === `!!인증`) {             //function test
         let server = client.guilds.cache.get("432327121000595466")
         let member = server.members.cache.get(message.author.id)
@@ -187,6 +205,7 @@ client.on('message', message => {
         member.roles.add(memberRole1);
         member.roles.remove(memberRole2);
         message.member.setNickname(args[1]);
+        message.delete();
   }
     // else if(args[0] === `!!역할`) {           
     //     if(message.member.roles.cache.has('역할ID')) { // 특정 역할 가지고있을시 행동
