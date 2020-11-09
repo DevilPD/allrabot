@@ -143,10 +143,11 @@ client.on('message', message => {
     .setDescription('올라봇의 마크 명령어!')
     .addFields(
         { name: '\u200B', value: '\u200B' },
-        { name: '!!서버주소', value: '서버주소를 불러옵니다.'},
+        { name: '!!서버주소', value: '서버주소를 알려드립니다.'},
         { name: '!!모드사이트', value: '마크 모드사이트를 알려드립니다.'},
         { name: '!!플긴사이트', value: '마크 플러그인사이트를 알려드립니다.'},
         { name: '!!모드버킷', value: '모드버킷(CatServer) 다운로드 사이트를 알려드립니다.'},
+        { name: '!!모드다운', value: '이번에 진행할 서버의 모드팩(포지포함)을 다운로드합니다.'},
     );
     const emb_ft = new Discord.MessageEmbed() // 도움말
     .setColor('#0099ff')
@@ -244,6 +245,10 @@ client.on('message', message => {
     }
     else if(args[0] == `!!서버주소`) {
         message.channel.send("서버주소는 www.ghdud4869.kro.kr 입니다!");
+    }
+    else if(args[0] == `!!모드다운`) {
+        message.channel.send("https://drive.google.com/file/d/13PLmu8Kq46du0v6kI8_-rJS7CdweXxpp/view?usp=sharing");
+        message.channel.send("버전은 1.12.2 입니다.");
     }
 
 });
