@@ -148,6 +148,7 @@ client.on('message', message => {
         { name: '!!플긴사이트', value: '마크 플러그인사이트를 알려드립니다.'},
         { name: '!!모드버킷', value: '모드버킷(CatServer) 다운로드 사이트를 알려드립니다.'},
         { name: '!!모드다운', value: '이번에 진행할 서버의 모드팩(포지포함)을 다운로드합니다.'},
+        { name: '!!모드종류', value: '이번에 진행할 서버의 모드팩의 정보를 알려드립니다.'},
     );
     const emb_ft = new Discord.MessageEmbed() // 도움말
     .setColor('#0099ff')
@@ -156,6 +157,27 @@ client.on('message', message => {
     .addFields(
         { name: '\u200B', value: '\u200B' },
         { name: '!!팀뷰어', value: '팀뷰어 다운로드 사이트를 알려드립니다.'},
+    );
+    const emb_info_MINECRAFT = new Discord.MessageEmbed() // 도움말
+    .setColor('#0099ff')
+    .setTitle('모드종류')
+    .setDescription('올라봇의 기능 명령어!')
+    .addFields(
+        { name: '\u200B', value: '\u200B' },
+        { name: 'AbyssalCraft ', value: '크툴루 신화 기반 모드! 새로운 보스와 맵!'},
+        { name: 'Applied Energistics 2 ', value: '무선스토리지. 마크 내의 웹하드'},
+        { name: 'BiblioCraft  ', value: '가구모드.'},
+        { name: 'chiselsandbit  ', value: '조각모드 ( 혹은 치즐모드라고도 한다 ).'},
+        { name: 'ComputerCraft  ', value: '마크내에서 코딩할수있다!'},
+        { name: 'EnderStorage', value: '산업모드를 서포트하기위해 추가했다.'},
+        { name: 'extrautils2 ', value: '산업모드를 서포트하기위해 추가했다.'},
+        { name: 'industrialforegoing', value: '공장모드. 다양한 아이템.심지어 엔티티까지 생산해낼수 있다.'},
+        { name: 'StevesCarts', value: '이것도한 자동화모드 다양한 응용이 가능하다.'},
+        { name: 'TConstruct', value: '지금까지의 아이템은 잊어라! 새로운 조합법과 새로운 아이템들.'},
+        { name: 'Thaumcraft', value: '산업모드를 서포트하기 위한 파이프 외 등등.'},
+        { name: 'Draconic-Evolution', value: '새로운 에너지! 새로운 아이템!'},
+        { name: 'industrialcraft', value: '마크 기술모드의 정점 산업모드!'},
+        
     );
 
 /*     setInterval(() => {
@@ -247,14 +269,16 @@ client.on('message', message => {
         message.channel.send("서버주소는 www.ghdud4869.kro.kr 입니다!");
     }
     else if(args[0] == `!!모드다운`) {
-        message.channel.send("https://drive.google.com/file/d/13PLmu8Kq46du0v6kI8_-rJS7CdweXxpp/view?usp=sharing");
+        message.channel.send("https://drive.google.com/file/d/1wAMscROLUeOjjt_3lPsMROPrKbFFMdd5/view?usp=sharing");
         message.channel.send("버전은 1.12.2 입니다.");
     }
-
+    else if(args[0] == `!!모드종류`) {
+        message.channel.send(emb_info_MINECRAFT);
+    }
 });
 client.login(process.env.TOKEN);
 
-
+// emb_info_MINECRAFT
 
 
 /*
