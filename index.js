@@ -135,7 +135,7 @@ client.on('message', message => {
         { name: '\u200B', value: '\u200B' },
         { name: '!!마크', value: '마크 관련 명령어들'},
         { name: '!!롤', value: '곧 추가예정'},
-        { name: '!!기능', value: '곧 추가예정'},
+        { name: '!!기능', value: '그 외 명령어들'},
     );
     const emb_HELP_MINECRAFT = new Discord.MessageEmbed() // 도움말
     .setColor('#0099ff')
@@ -144,8 +144,17 @@ client.on('message', message => {
     .addFields(
         { name: '\u200B', value: '\u200B' },
         { name: '!!서버주소', value: '서버주소를 불러옵니다.'},
-        { name: '!!옵티파인', value: '최신버전 옵티파인을 불러옵니다.'},
-        { name: '!!버전', value: '현재 사용하는 서버의 버전을 불러옵니다.'},
+        { name: '!!모드사이트', value: '마크 모드사이트를 알려드립니다.'},
+        { name: '!!플긴사이트', value: '마크 플러그인사이트를 알려드립니다.'},
+        { name: '!!모드버킷', value: '모드버킷(CatServer) 다운로드 사이트를 알려드립니다.'},
+    );
+    const emb_ft = new Discord.MessageEmbed() // 도움말
+    .setColor('#0099ff')
+    .setTitle('기능')
+    .setDescription('올라봇의 기능 명령어!')
+    .addFields(
+        { name: '\u200B', value: '\u200B' },
+        { name: '!!팀뷰어', value: '팀뷰어 다운로드 사이트를 알려드립니다.'},
     );
 
 /*     setInterval(() => {
@@ -217,6 +226,23 @@ client.on('message', message => {
     else if(args[0] === `!!마크`) {             //function test
         message.channel.send(emb_HELP_MINECRAFT);
     }
+    else if(args[0] == `!!모드사이트`) {
+        message.channel.send("https://www.curseforge.com/minecraft/mc-mods?filter-game-version=2020709689%3A6756&filter-sort=4");
+    }
+    else if(args[0] == `!!플긴사이트`) {
+        message.channel.send("https://dev.bukkit.org/bukkit-plugins?filter-game-version=2020709689%3A7915&filter-sort=4");
+    }
+    //  
+    else if(args[0] == `!!모드버킷`) {
+        message.channel.send("https://github.com/Luohuayu/CatServer/blob/1.12.2/README_EN.md");
+    }
+    else if(args[0] == `!!팀뷰어`) {
+        message.channel.send("https://www.teamviewer.com/ko/teamviewer-automatic-download/?utm_source=google&utm_medium=cpc&utm_campaign=kr%7Cb%7Cpr%7C20%7Cjun%7Cexact-brand-only-sn%7Cfree%7Ct0%7C0&utm_content=exact_Brand-only&utm_term=teamviewer");
+    }
+    else if(args[0] == `!!서버주소`) {
+        message.channel.send("서버주소는 www.ghdud4869.kro.kr 입니다!");
+    }
+
 });
 client.login(process.env.TOKEN);
 
