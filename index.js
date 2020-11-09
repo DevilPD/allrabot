@@ -225,6 +225,9 @@ client.on('message', message => {
     // }
     else if(args[0] === `!!마크`) {             //function test
         message.channel.send(emb_HELP_MINECRAFT);
+    } 
+    else if(args[0] === `!!기능`) {             //function test
+        message.channel.send(emb_ft);
     }
     else if(args[0] == `!!모드사이트`) {
         message.channel.send("https://www.curseforge.com/minecraft/mc-mods?filter-game-version=2020709689%3A6756&filter-sort=4");
