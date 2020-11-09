@@ -161,7 +161,7 @@ client.on('message', message => {
     const emb_info_MINECRAFT = new Discord.MessageEmbed() // 도움말
     .setColor('#0099ff')
     .setTitle('모드종류')
-    .setDescription('올라봇의 기능 명령어!')
+    .setDescription('올라봇이 알려주는 모드종류!')
     .addFields(
         { name: '\u200B', value: '\u200B' },
         { name: 'AbyssalCraft ', value: '크툴루 신화 기반 모드! 새로운 보스와 맵!'},
