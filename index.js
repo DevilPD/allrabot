@@ -270,7 +270,7 @@ client.on('message', message => {
         message.channel.send("서버주소는 www.ghdud4869.kro.kr 입니다!");
     }
     else if(args[0] == `!!모드다운`) {
-        message.channel.send("https://drive.google.com/file/d/1wAMscROLUeOjjt_3lPsMROPrKbFFMdd5/view?usp=sharing");
+        message.channel.send("https://drive.google.com/file/d/1PZrmEp69FJb79Wppq520eKEN3C5l2Ene/view?usp=sharing");
         message.channel.send("버전은 1.12.2 입니다.");
     }
     else if(args[0] == `!!모드종류`) {
