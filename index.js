@@ -174,9 +174,10 @@ client.on('message', message => {
         { name: 'industrialforegoing', value: '공장모드. 다양한 아이템.심지어 엔티티까지 생산해낼수 있다.'},
         { name: 'StevesCarts', value: '이것도한 자동화모드 다양한 응용이 가능하다.'},
         { name: 'TConstruct', value: '지금까지의 아이템은 잊어라! 새로운 조합법과 새로운 아이템들.'},
-        { name: 'Thaumcraft', value: '산업모드를 서포트하기 위한 파이프 외 등등.'},
+        { name: 'Thaumcraft', value: '마크에서 마법을 써보자!'},
         { name: 'Draconic-Evolution', value: '새로운 에너지! 새로운 아이템!'},
         { name: 'industrialcraft', value: '마크 기술모드의 정점 산업모드!'},
+        { name: 'ThermalExpansion', value: '산업모드를 서포트하기 위한 파이프 외 등등.'},
         
     );
 
