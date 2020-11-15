@@ -270,8 +270,11 @@ client.on('message', message => {
         message.channel.send("서버주소는 www.ghdud4869.kro.kr 입니다!");
     }
     else if(args[0] == `!!모드다운`) {
-        message.channel.send("https://drive.google.com/file/d/1PZrmEp69FJb79Wppq520eKEN3C5l2Ene/view?usp=sharing");
+        message.channel.send("https://drive.google.com/file/d/1Xk57YpvxGn3Bl3Sq_ORli68vjodSi3HC/view?usp=sharing");
         message.channel.send("버전은 1.12.2 입니다.");
+    }
+    else if(args[0] == `!!추가모드`) {
+        message.channel.send("https://drive.google.com/file/d/11_m3S8yWCQAo13MAhUh8X4wezMnDUu1U/view?usp=sharing");
     }
     else if(args[0] == `!!모드종류`) {
         message.channel.send(emb_info_MINECRAFT);
