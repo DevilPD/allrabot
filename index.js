@@ -125,6 +125,8 @@ client.on('message', message => {
     .addFields(
         { name: '!!인증 <본명>', value: 'ex) !!인증 호영'},
         { name: '꼭! 본명으로 해주세요', value: '안할시 생기는 불이익은 책임지지 않습니다.'},
+        { name: 'ex) 강퇴', value: ' '},
+
     );
     // { name: '\u200B', value: '\u200B' },        // 빈칸만들기
     const emb_HELP = new Discord.MessageEmbed() // 도움말
