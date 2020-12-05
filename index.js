@@ -146,8 +146,8 @@ client.on('message', message => {
     .setDescription('올라봇의 명령어 모음!!')
     .addFields(
         { name: '\u200B', value: '\u200B' },
-        { name: '!!마크', value: '마크 관련 명령어들'},
-        { name: '!!롤', value: '곧 추가예정'},
+        { name: '!!마크', value: '마크 관련 정보'},
+        { name: '!!롤', value: '롤 검색기능'},
         { name: '!!기능', value: '그 외 명령어들'},
     );
     const emb_HELP_MINECRAFT = new Discord.MessageEmbed() // 도움말
@@ -193,7 +193,18 @@ client.on('message', message => {
         { name: 'ThermalExpansion', value: '산업모드를 서포트하기 위한 파이프 외 등등.'},
         
     );
+    const lol_emb = new Discord.MessageEmbed() // 도움말
+    .setColor('#0099ff')
+    .setTitle('롤 명령어')
+    .setDescription('올라봇의 롤 명령어!')
+    .addFields(
+        { name: '\u200B', value: '\u200B' },
+        { name: '!!롤 <챔피언>', value: '롤 챔피언 정보 링크를 알려드립니다.'},
+        { name: '!!롤 <플레이어이름>', value: '롤 플레이어 정보 링크를 알려드립니다'},
+        { name: '!!롤 칼바람 <챔피언>', value: '칼바람에서의 롤 챔피언 정보 링크를 알려드립니다.'},
+    );
 
+    // lol_emb 
 /*     setInterval(() => {
         const date = new Date(); // today
         if (date.getHours() === 16 && date.getMinutes() === 5) {
@@ -297,10 +308,18 @@ client.on('message', message => {
             message.channel.send("https://www.op.gg/champion/" + champ[args[1]] );
         }
         else if(args[1] == `칼바람`) {
+            if(champ[args[2]] != null) {
             message.channel.send("https://poro.gg/champions/" + champ[args[2]] + "/aram");
+            }
+            else {
+                message.channel.send("플레이어 정보는 !!롤 <플레이어>를 사용해야합니다.")
+            }
+        }
+        else if(args[1] != null) {
+            message.channel.send("https://www.op.gg/summoner/userName=" + args[1]);
         }
         else {
-            message.channel.send("https://www.op.gg/summoner/userName=" + args[1]);
+            message.channel.send(lol_emb)
         }
     }
 });
