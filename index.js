@@ -285,8 +285,8 @@ client.on('message', message => {
         message.channel.send(emb_info_MINECRAFT);
     }
     else if(args[0] === `!!say`) {
-        var nm = args[1];
-        message.channel.send(champ.nm)
+        // var nm = args[1];
+        message.channel.send(champ.가렌)
     }
     else if(args[0] === `!!FTT`) {             //function test
         if(args[1] === `가렌`) {
