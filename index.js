@@ -1,22 +1,77 @@
 const Discord = require('discord.js');
+const { fsync } = require('fs');
 const https = require('https');
 const champ = require('./champ.json');
 const client = new Discord.Client();
 
-function deleteMessages(amount) {
-	return new Promise(resolve => {
-		if (amount > 10) throw new Error('You can\'t delete more than 10 Messages at a time.');
-		setTimeout(() => resolve('Deleted 10 messages.'), 2000);
-	});
+function shuffle(a) {
+    var j, x, i;
+
+    for ( i = a.length; i; i-= 1) {
+        j = Math.floor(Math.random() * i);
+        x = a[i - 1];
+        a[i - 1] = a[j];
+        a[j] = x;
+    }
 }
 
-deleteMessages(5).then(value => {
-	// `deleteMessages` is complete and has not encountered any errors
-	// the resolved value will be the string "Deleted 10 messages"
-}).catch(error => {
-	// `deleteMessages` encountered an error
-	// the error will be an Error Object
-});
+function table(x) {
+
+    let res = []
+    if(x == 1) {
+        res.push("a1")
+    }
+    else if(x == 2) {
+        res.push("b1")
+    }
+    else if(x == 3) {
+        res.push("c1")
+    }
+    else if(x == 4) {
+        res.push("d1")
+    }
+    else if(x == 5) {
+        res.push("e1")
+    }
+    else if(x == 6) {
+        res.push("a2")
+    }
+    else if(x == 7) {
+        res.push("b2")
+    }
+    else if(x == 8) {
+        res.push("c2")
+    }
+    else if(x == 9) {
+        res.push("d2")
+    }
+    else if(x == 10) {
+        res.push("e2")
+    }
+    return res;
+}
+////
+function sadaliNum(n) {
+    let sadali = [];
+    let i = 0;
+    while (i < n) {
+        let nm = Math.floor(Math.random() * 10 + 1);
+        if (! sameNum(nm)) {
+            sadali.push(nm);
+            i++;
+        }
+    }
+    function sameNum(nm) {
+        for (var i = 0; i < sadali.length; i++) {
+            if (nm === sadali[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
+    return sadali;
+}
+
 
 function getriotinfo_1(playername, i) //data_split_GID_넘버_2[i] i = 1, 9, 17, 25 ... 이렇게 gameID임 그리고 넘버는 getrioninfo_"숫자"<여기
 {
@@ -203,6 +258,14 @@ client.on('message', message => {
         { name: '!!롤 <플레이어이름>', value: '롤 플레이어 정보 링크를 알려드립니다'},
         { name: '!!롤 칼바람 <챔피언>', value: '칼바람에서의 롤 챔피언 정보 링크를 알려드립니다.'},
     );
+    const emb_team = new Discord.MessageEmbed() // 도움말
+    .setColor('#0099ff')
+    .setTitle('팀 가르기')
+    .setDescription('올라봇의 팀 가르기!')
+    .addFields(
+        { name: '\u200B', value: '\u200B' },
+        { name: '!!팀가르기 <사람들>', value: `ex) !!팀가르기 호영,진환,성묵,...\n\n※최대 10명까지!※`},
+    );
 
     // lol_emb 
 /*     setInterval(() => {
@@ -225,6 +288,94 @@ client.on('message', message => {
     if(args[0] === `!!FT`) {             //function test
       getriotinfo_1(args[1], 1);
     }
+    else if(args[0] === `!!팀가르기`) {             //function test
+        if (args[1] == null) {
+            message.channel.send(emb_team);
+        }
+        else {
+        var res = args[1].split(',')
+        if (res[0] != null) {
+            if (res[1] != null) {
+                if (res[2] != null) {
+                    if (res[3] != null) {
+                        if (res[4] != null) {
+                            if (res[5] != null) {
+                                if (res[6] != null) {
+                                    if (res[7] != null) {
+                                        if (res[8] != null) {
+                                            if (res[9] != null) {
+                                                if (res[10] != null) {
+                                                    var bug = "엥"
+                                                }
+                                                else {
+                                                    var nm = 10;
+                                                }
+                                            }
+                                            else {
+                                                var nm = 9;
+                                            }
+                                        }
+                                        else {
+                                            var nm = 8;
+                                        }
+                                    }
+                                    else {
+                                        var nm = 7;
+                                    }
+                                }
+                                else {
+                                    var nm = 6;
+                                }
+                            }
+                            else {
+                                var nm = 5;
+                            }
+                        }
+                        else {
+                            var nm = 4;
+                        }
+                    }
+                    else {
+                        var nm = 3;
+                    }
+                }
+                else {
+                    var nm = 2;
+                }
+            }
+            else {
+                var nm = 1;
+            }
+        }
+        else {
+            var nm = 0;
+        }
+        if(bug != "엥") {
+        const shuffleArray = array => {
+            for (let i = 0; i < array.length; i++) {
+              let j = Math.floor(Math.random() * (i + 1));
+              // [array[i], array[j]] = [array[j], array[i]];
+              const x = array[i];
+              array[i] = array[j];
+              array[j] = x;
+            }
+            return array;
+          };
+          shuffle(res);
+        message.channel.send("-------1팀--------");
+        for (i = 0; i < parseInt(nm/2); i++) {
+            message.channel.send(res[i]);
+        }
+        message.channel.send("-------2팀--------");
+        for (i = parseInt(nm/2); i < nm; i++) {
+            message.channel.send(res[i]);
+        }
+    }
+    else {
+        message.channel.send("최대 10명 까지만 가능합니다.");
+    }
+    }
+  }
     else if(args[0] === `!!명령어`) {             //function test
           message.channel.send(emb_HELP);
     }
@@ -339,4 +490,23 @@ https://www.op.gg/champion/nunu/
     "revisionDate":1602722665000,
     "summonerLevel":157
 }
+*/
+
+/*
+message.channel.send("------------------------------------------------")
+message.channel.send("1 --> " + a1 + "," + b1 + "," + c1 + "," + d1 + "," + e1)
+message.channel.send("2 --> " + a2 + "," + b2 + "," + c2 + "," + d2 + "," + e2)
+message.channel.send("------------------------------------------------")
+
+
+
+*/ 
+
+/*
+
+
+args[1] 만큼 난수생성 (      sadaliNum(args[1])      )
+
+
+
 */
