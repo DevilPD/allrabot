@@ -9,9 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "discord.js": "^12.4.0",
     "dotenv": "^8.2.0",
+    "fs": "0.0.1-security",
     "ftp-client": "^0.2.2",
+    "jsonfile": "^6.1.0",
     "minecraft-data": "^2.69.1",
     "minecraft-protocol": "^1.17.0",
     "minecraft-server-util": "^3.0.3",

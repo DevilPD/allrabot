@@ -1,77 +1,23 @@
 const Discord = require('discord.js');
 const { fsync } = require('fs');
 const https = require('https');
+const cheerio = require('cheerio');
+const request = require('request');
+const fs = require('fs').promises;
+const fst = require('fs');
+const jsonfile = require('jsonfile');
 const champ = require('./champ.json');
 const client = new Discord.Client();
 
-function shuffle(a) {
-    var j, x, i;
-
-    for ( i = a.length; i; i-= 1) {
-        j = Math.floor(Math.random() * i);
-        x = a[i - 1];
-        a[i - 1] = a[j];
-        a[j] = x;
+const shuffleArray = array => { // 배열 랜덤 섞기
+    for (let i = 0; i < array.length; i++) {
+      let j = Math.floor(Math.random() * (i + 1));
+      const x = array[i];
+      array[i] = array[j];
+      array[j] = x;
     }
-}
-
-function table(x) {
-
-    let res = []
-    if(x == 1) {
-        res.push("a1")
-    }
-    else if(x == 2) {
-        res.push("b1")
-    }
-    else if(x == 3) {
-        res.push("c1")
-    }
-    else if(x == 4) {
-        res.push("d1")
-    }
-    else if(x == 5) {
-        res.push("e1")
-    }
-    else if(x == 6) {
-        res.push("a2")
-    }
-    else if(x == 7) {
-        res.push("b2")
-    }
-    else if(x == 8) {
-        res.push("c2")
-    }
-    else if(x == 9) {
-        res.push("d2")
-    }
-    else if(x == 10) {
-        res.push("e2")
-    }
-    return res;
-}
-////
-function sadaliNum(n) {
-    let sadali = [];
-    let i = 0;
-    while (i < n) {
-        let nm = Math.floor(Math.random() * 10 + 1);
-        if (! sameNum(nm)) {
-            sadali.push(nm);
-            i++;
-        }
-    }
-    function sameNum(nm) {
-        for (var i = 0; i < sadali.length; i++) {
-            if (nm === sadali[i]) {
-                return true;
-            }
-        }
-        return false;
-    }
-    return sadali;
-}
-
+    return array;
+  }
 
 function getriotinfo_1(playername, i) //data_split_GID_넘버_2[i] i = 1, 9, 17, 25 ... 이렇게 gameID임 그리고 넘버는 getrioninfo_"숫자"<여기
 {
@@ -176,6 +122,52 @@ client.once('ready', () => {
     console.log("                          제작자 : 원호영");
     client.user.setActivity(' !!명령어 | 진화', { type : 'PLAYING'});
     client.guilds.cache.get("308931109067030530").channels.cache.get("308931109067030530").send("디코봇이 활성화되었습니다.");
+    
+    setInterval(function() {
+        var url = "https://na.leagueoflegends.com/ko-kr/news/tags/patch-notes"
+        request(url, function(error, response, html){
+            if (error) {throw error};
+            var rp_html_1 = html.replace(/\=/g, "");
+            var index_html = rp_html_1.indexOf("style__Item-sc-3mnuh-3 ekxbJn")
+            var href_html_1 = rp_html_1.substr(index_html, 200);
+            var index_html_2 = href_html_1.indexOf("href");
+            var href_html_2 = href_html_1.substr(index_html_2 + 5, 200)
+            var sp_href_html_2 = href_html_2.split('"');
+            var patch_note = "https://na.leagueoflegends.com/" + sp_href_html_2[0]            
+            var newon = sp_href_html_2[0];
+            
+
+            async function updatePatch(old) {
+                try {
+                    let data = await fs.readFile('patch.json');
+                    let obj = JSON.parse(data);
+            
+                    obj.old = old;
+            
+                    await fs.writeFile('patch.json', JSON.stringify(obj));
+                } catch(e) {
+                    console.log(e);
+                    throw e;
+                }
+            }
+            var text = fst.readFileSync('patch.json', 'utf8');
+            var rp_text = text.replace(/\{/g, "").replace(/\}/g, "").replace(/\"/g, "");
+            var sp_text = rp_text.split(':');
+            var old = sp_text[1];
+
+            if (newon == old) {
+                console.log("업데이트가 아직 존재하지 않습니다.");
+            }
+            else {
+                console.log(old);
+                client.guilds.cache.get("432327121000595466").channels.cache.get("669513085777739777").send("새로운 업데이트!");
+                client.guilds.cache.get("432327121000595466").channels.cache.get("669513085777739777").send(patch_note);
+                updatePatch(newon);
+            }
+            // console.log(sp_html_2);
+        });
+    }, 10000);
+    
 });
 
  // 
@@ -286,7 +278,54 @@ client.on('message', message => {
       }, 60000); // check every minute */
 
     if(args[0] === `!!FT`) {             //function test
-      getriotinfo_1(args[1], 1);
+        var text = fs.readFileSync('patch.json', 'utf8');
+        var rp_text = text.replace(/\{/g, "").replace(/\}/g, "").replace(/\"/g, "");
+        var sp_text = rp_text.split(':');
+        var old = sp_text[1];
+        message.channel.send(old)
+    }
+    else if(args[0] ===`!!https`) { 
+        var url = "https://na.leagueoflegends.com/ko-kr/news/tags/patch-notes"
+        request(url, function(error, response, html){
+            if (error) {throw error};
+            var rp_html_1 = html.replace(/\=/g, "");
+            var index_html = rp_html_1.indexOf("style__Item-sc-3mnuh-3 ekxbJn")
+            var href_html_1 = rp_html_1.substr(index_html, 200);
+            var index_html_2 = href_html_1.indexOf("href");
+            var href_html_2 = href_html_1.substr(index_html_2 + 5, 200)
+            var sp_href_html_2 = href_html_2.split('"');
+            var patch_note = "https://na.leagueoflegends.com/" + sp_href_html_2[0]            
+            var newon = sp_href_html_2[0];
+            
+
+            async function updatePatch(old) {
+                try {
+                    let data = await fs.readFile('patch.json');
+                    let obj = JSON.parse(data);
+            
+                    obj.old = old;
+            
+                    await fs.writeFile('patch.json', JSON.stringify(obj));
+                } catch(e) {
+                    console.log(e);
+                    throw e;
+                }
+            }
+            var text = fst.readFileSync('patch.json', 'utf8');
+            var rp_text = text.replace(/\{/g, "").replace(/\}/g, "").replace(/\"/g, "");
+            var sp_text = rp_text.split(':');
+            var old = sp_text[1];
+
+            if (newon == old) {
+                client.guilds.cache.get("432327121000595466").channels.cache.get("669513085777739777").send("channel check.");
+            }
+            else {
+                console.log(old);
+                console.log(patch_note);
+                updatePatch(newon);
+            }
+            // console.log(sp_html_2);
+        });
     }
     else if(args[0] === `!!팀가르기`) {             //function test
         if (args[1] == null) {
@@ -351,26 +390,16 @@ client.on('message', message => {
             var nm = 0;
         }
         if(bug != "엥") {
-        const shuffleArray = array => {
-            for (let i = 0; i < array.length; i++) {
-              let j = Math.floor(Math.random() * (i + 1));
-              // [array[i], array[j]] = [array[j], array[i]];
-              const x = array[i];
-              array[i] = array[j];
-              array[j] = x;
+            shuffleArray(res);
+            message.channel.send("-------1팀--------");
+            for (i = 0; i < parseInt(nm/2); i++) {
+                message.channel.send(res[i]);
             }
-            return array;
-          };
-          shuffle(res);
-        message.channel.send("-------1팀--------");
-        for (i = 0; i < parseInt(nm/2); i++) {
-            message.channel.send(res[i]);
+            message.channel.send("-------2팀--------");
+            for (i = parseInt(nm/2); i < nm; i++) {
+                message.channel.send(res[i]);
+            }
         }
-        message.channel.send("-------2팀--------");
-        for (i = parseInt(nm/2); i < nm; i++) {
-            message.channel.send(res[i]);
-        }
-    }
     else {
         message.channel.send("최대 10명 까지만 가능합니다.");
     }
