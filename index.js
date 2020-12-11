@@ -317,11 +317,10 @@ client.on('message', message => {
             var old = sp_text[1];
 
             if (newon == old) {
-                client.guilds.cache.get("432327121000595466").channels.cache.get("669513085777739777").send("channel check.");
+                message.channel.send(old);
             }
             else {
-                console.log(old);
-                console.log(patch_note);
+                message.channel.send('업데이트가 존재합니다.');
                 updatePatch(newon);
             }
             // console.log(sp_html_2);
