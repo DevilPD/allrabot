@@ -123,7 +123,7 @@ client.once('ready', () => {
     client.user.setActivity(' !!명령어 | 진화', { type : 'PLAYING'});
     client.guilds.cache.get("308931109067030530").channels.cache.get("308931109067030530").send("디코봇이 활성화되었습니다.");
     
-    setInterval(function() {
+     setInterval(function() {
         var url = "https://na.leagueoflegends.com/ko-kr/news/tags/patch-notes"
         request(url, function(error, response, html){
             if (error) {throw error};
@@ -167,7 +167,6 @@ client.once('ready', () => {
             // console.log(sp_html_2);
         });
     }, 10000);
-    
 });
 
  // 
@@ -494,6 +493,14 @@ client.on('message', message => {
                 message.channel.send("플레이어 정보는 !!롤 <플레이어>를 사용해야합니다.")
             }
         }
+        else if(args[1] == `우르프`) {
+            if(champ[args[2]] != null) {
+            message.channel.send("https://poro.gg/champions/" + champ[args[2]] + "/urf");
+            }
+            else {
+                message.channel.send("플레이어 정보는 !!롤 <플레이어>를 사용해야합니다.")
+            }
+        }
         else if(args[1] != null) {
             message.channel.send("https://www.op.gg/summoner/userName=" + args[1]);
         }
@@ -501,6 +508,9 @@ client.on('message', message => {
             message.channel.send(lol_emb)
         }
     }
+    else if(args[0] === `!!테스트`) {             //function test
+        
+  }
 });
 client.login(process.env.TOKEN);
 
